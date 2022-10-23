@@ -9,15 +9,35 @@ using OpenTK.Graphics.OpenGL;
 using OpenTK.Input;
 using OpenTK.Platform;
 
+
 namespace Batinas3132B
 {
+
     class Program : GameWindow
     {
+       
+
         public Program() : base(800, 600)
         {
             KeyDown += Keyboard_KeyDown;
+            //MouseDown += Mouse_MouseButton;
+            MouseMove += Mouse_MouseMove;
         }
 
+        private void Mouse_MouseButton(object sender, MouseButtonEventArgs e)
+        {
+            Console.WriteLine($"{e.X} {e.Y}");
+            GL.Rotate(46, Vector3d.UnitZ);
+
+        }
+
+        private void Mouse_MouseMove(object sender, MouseMoveEventArgs e)
+        {
+            Console.WriteLine($"{e.X} {e.Y}");
+            GL.Rotate(e.X/180f, Vector3d.UnitZ);
+           
+
+        }
         // Tratează evenimentul generat de apăsarea unei taste. Mecanismul standard oferit de .NET
         // este cel utilizat.
         void Keyboard_KeyDown(object sender, KeyboardKeyEventArgs e)
@@ -33,20 +53,29 @@ namespace Batinas3132B
             //laborator 2---rotatii prin taste
             if(e.Key == Key.A)
             {
-                GL.Rotate(90, Vector3d.UnitZ);
-                GL.Translate(new Vector3(0, 0, -1));
+               // GL.Rotate(90, Vector3d.UnitY);
+                GL.Translate(new Vector3(0, 0, 1));
                 GL.Scale(0.5f, 0.5f, 0.5f);
 
             }
             else
             if(e.Key == Key.D)
             {
-                GL.Rotate(-90, Vector3d.UnitZ);
-                GL.Translate(new Vector3(0, 0, 1));
+               /// GL.Rotate(-90, Vector3d.UnitY);
+                GL.Translate(new Vector3(0, 0, -1));
                GL.Scale(1.5f, 1.5f, 1.5f);
             }
-           
+
+            else
+            if(e.Key == Key.W)
+            {
+                 GL.Rotate(-90, Vector3d.UnitZ);
+            }
+
+       
         }
+
+        
 
         // Setare mediu OpenGL și încarcarea resurselor (dacă e necesar) - de exemplu culoarea de
         // fundal a ferestrei 3D.
@@ -71,12 +100,13 @@ namespace Batinas3132B
             GL.Ortho(-1.0, 1.0, -1.0, 1.0, -10.0, 40.0);
             
         }
-
+      
         // Secțiunea pentru "game logic"/"business logic". Tot ce se execută în această secțiune va fi randat
         // automat pe ecran în pasul următor - control utilizator, actualizarea poziției obiectelor, etc.
         protected override void OnUpdateFrame(FrameEventArgs e)
         {
             // Momentan aplicația nu face nimic!
+            // glfwSetMouseButtonCallback(window, mouse_button_callback);
             
 
         }
