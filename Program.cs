@@ -24,13 +24,7 @@ namespace Batinas3132B
             MouseMove += Mouse_MouseMove;
         }
 
-        private void Mouse_MouseButton(object sender, MouseButtonEventArgs e)
-        {
-            Console.WriteLine($"{e.X} {e.Y}");
-            GL.Rotate(46, Vector3d.UnitZ);
-
-        }
-
+        //lab 2 -------------------------------------------------------------------------------
         private void Mouse_MouseMove(object sender, MouseMoveEventArgs e)
         {
             Console.WriteLine($"{e.X} {e.Y}");
@@ -92,9 +86,6 @@ namespace Batinas3132B
         protected override void OnResize(EventArgs e)
         {
             GL.Viewport(0, 0, Width, Height);
-            //functia MatrixMode alege matricea care va fi pusa in varful stivei de matrice in functie de argumentul dat (ModelView, Projection, Color, Texture)
-            //de ex: transforma coordonatele din matrice ca fiind coordonatele ochiului/camerei din scena
-            //
             GL.MatrixMode(MatrixMode.Projection); 
             GL.LoadIdentity();
             GL.Ortho(-1.0, 1.0, -1.0, 1.0, -10.0, 40.0);
